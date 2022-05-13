@@ -486,7 +486,7 @@ export default {
     this.getGameDetail(1);
     this.updataInterval = setInterval(function() {
       _this.getGameDetail(_this.getKey);
-    }, 10000);
+    }, 10000000);
   },
 };
 </script>
