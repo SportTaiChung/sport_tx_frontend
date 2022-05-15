@@ -10,6 +10,8 @@
         </li>
       </ul>
     </div>
+
+    <!-- 投注資訊Tab 樣式 -->
     <div v-show="getthistab === 0" class="rightBody_main">
       <div v-show="getBetdata.length > 0">
         <ul class="flex betInfo_SubT">
@@ -28,11 +30,11 @@
         </ul>
 
         <div v-if="activeBetInfo === 0">
-          <betInfo-list :type="0" @change="uptype($event)"></betInfo-list>
+          <betInfo-list :type="0"></betInfo-list>
         </div>
         <!-- 过关投注 -->
         <div v-if="activeBetInfo === 1 && getBetdata.length > 1">
-          <betInfo-list :type="1" @change="uptype($event)"></betInfo-list>
+          <betInfo-list :type="1"></betInfo-list>
         </div>
         <div
           v-show="activeBetInfo === 1 && getBetdata.length <= 1"
@@ -48,6 +50,8 @@
         请先点击赔率以添加选项
       </div>
     </div>
+
+    <!-- 最新注單Tab 樣式 -->
     <div v-show="getthistab === 1" class="rightBody_main">
       <div>
         <ul class="flex betInfo_SubT">
@@ -88,13 +92,15 @@ import betInfoList from "./betInfoList.vue";
 import newbetScroll from "./newbetScroll.vue";
 
 export default {
-  name: "rightBody",
+  name: "bettingData",
   data() {
     return {
-      activeValue: 0,
+      // 投注資訊下
+      // 選擇單項或是過關
       activeBetInfo: 0,
+      // 最新資訊下
+      // 選擇未結算或是已結算
       activeNewbet: 0,
-      datatype: 0,
     };
   },
   components: { betInfoList, newbetScroll },
@@ -109,17 +115,11 @@ export default {
   },
   methods: {
     ...mapMutations("games", ["ADD_BERDATA", "ADD_WAGERSTRING", "SET_TAB"]),
-    selcetActive(val) {
-      this.activeValue = val;
-    },
     selcetBetInfo(val) {
       this.activeBetInfo = val;
     },
     selcetNewbet(val) {
       this.activeNewbet = val;
-    },
-    async uptype(val) {
-      this.activeValue = val;
     },
   },
   watch: {},

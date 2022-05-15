@@ -379,23 +379,22 @@ export default {
       var _this = this;
       playState({ traceCodeKey: key }).then((res) => {
         if (this.type === 1) {
-          if (res.data[0] === 201) {
+          if (res.data[0].code === 201) {
             setTimeout(function() {
               _this.playState(key);
             }, 3000);
             this.loading = true;
-          } else if (res.data[0] === 200) {
+          } else if (res.data[0].code === 200) {
             this.$notify.success({
-              message: this.res.data[0].Message,
+              message: res.data[0].Message,
             });
             this.loading = false;
             var deletedtype = "all";
             _this.DELETED_BERDATA(deletedtype);
             _this.getbetHistory();
-            _this.$emit("change", 1);
           } else {
             this.$notify.error({
-              message: this.res.data[0].Message,
+              message: res.data[0].Message,
             });
             this.loading = false;
           }
